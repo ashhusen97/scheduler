@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Modal, TouchableOpacity, FlatList, Dimensions, Image, AsyncStorage } from 'react-native'
+import { Text, StyleSheet, View, Modal, TouchableOpacity, FlatList, Dimensions, Image, ScrollView } from 'react-native'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment'
 const { width,height } = Dimensions.get('window')
@@ -55,7 +55,9 @@ export default class SetVideos extends Component {
                     }}
                 >
                     <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
+                        <ScrollView style={styles.modalView}
+                        contentContainerStyle = {{alignItems:'center'}}
+                        >
                             <Text style={styles.modalText}>WakeUp Videos</Text>
 
                             <FlatList
@@ -75,7 +77,19 @@ export default class SetVideos extends Component {
                                 horizontal
                                 showsHorizontalScrollIndicator  = {false}
                             />
-
+                            
+                         
+                            <Text style={styles.modalText}>{this.props.videoNames ? 'Selected Videos': null}</Text>
+                                <FlatList
+                                    data={this.props.videoNames}
+                                    renderItem={({ item }) => { return (<TouchableOpacity style = {{backgroundColor:'yellow',padding:10,borderRadius:5,margin:5}}><Text>{item}</Text></TouchableOpacity>) }}
+                                    keyExtractor={(item, index) => `${Math.random()}`}
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}
+                                />
+                            
+                            
+                        
                             <View style = {{flexDirection:'row',padding:20}}>
                             <TouchableOpacity
                                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -87,11 +101,11 @@ export default class SetVideos extends Component {
                                 style={{ ...styles.openButton, backgroundColor: "red" }}
                                 onPress={this.props.hideModal}
                             >
-                                <Text style={styles.textStyle}>Close</Text>
+                                <Text style={styles.textStyle}>Back</Text>
                             </TouchableOpacity>
                             </View>
 
-                        </View>
+                        </ScrollView>
                     </View>
                 </Modal>
 
@@ -112,7 +126,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "white",
         borderRadius: 20,
-        alignItems: "center",
+        
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

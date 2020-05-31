@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View ,Modal,Button} from 'react-native'
 import Video from 'react-native-video';
+import setAlarm from './setAlarm';
 export default class VideoModal extends Component {
    
     render() {
@@ -11,7 +12,7 @@ export default class VideoModal extends Component {
                 <View style={{ flex: 1, backgroundColor: 'gray' }}>
                     <View style={{ flex: 3 }}>
                       
-
+                   
                         <Video
                             disableFocus={false}
                             pictureInPicture={true}

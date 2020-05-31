@@ -7,7 +7,7 @@ export default class Clock extends Component {
         return (
             <DateTimePickerModal
                 isVisible={this.props.isDatePickerVisible}
-                mode={'datetime'}
+                mode={'time'}
                 onConfirm={this.props.handleConfirm}
                 is24Hour={false}
                 onCancel={() => { this.props.hideDatePicker}}
