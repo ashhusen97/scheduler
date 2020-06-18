@@ -10,8 +10,8 @@ export default class App extends Component {
   render() {
     return (
       //  <Alarmsecond/>
-      <Provider store={store}>
-        <Navigation />
+      <Provider store={stopdre}>
+        <NavigationsAor />
       </Provider>
     );
   }
