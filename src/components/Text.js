@@ -9,11 +9,15 @@ export default class Typography extends Component {
       h1,
       h2,
       h3,
+      buttonText,
       title,
       body,
       caption,
       small,
+      sentence,
       size,
+      justifyCenter,
+      alignCenter,
       transform,
       align,
       // styling
@@ -48,6 +52,11 @@ export default class Typography extends Component {
       h1 && styles.h1,
       h2 && styles.h2,
       h3 && styles.h3,
+      buttonText && styles.buttonText,
+      justifyCenter && styles.justifyCenter,
+      alignCenter && styles.alignCenter,
+      black && styles.black,
+      sentence && styles.sentence,
       title && styles.title,
       body && styles.body,
       caption && styles.caption,
@@ -93,6 +102,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   // variations
   regular: {
@@ -109,6 +119,12 @@ const styles = StyleSheet.create({
   },
   light: {
     fontWeight: '200',
+  },
+  justifyCenter: {
+    justifyContent: 'center',
+  },
+  alignCenter: {
+    alignItems: 'center',
   },
   // position
   center: {textAlign: 'center'},
@@ -127,6 +143,19 @@ const styles = StyleSheet.create({
   h2: {fontSize: 36},
   h3: {fontSize: 32},
   title: {fontSize: 50},
+  small: {fontSize: 20},
+  black: {
+    color: 'black',
+  },
+  gray: {
+    color: 'gray',
+  },
+  sentence: {
+    textTransform: 'capitalize',
+  },
+  buttonText: {
+    fontSize: 12,
+  },
   // body: theme.fonts.body,
   // caption: theme.fonts.caption,
   // small: theme.fonts.small,

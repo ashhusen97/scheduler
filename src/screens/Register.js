@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
@@ -9,48 +7,14 @@ import {
   TextInput,
   ImageBackground,
   Dimensions,
-  AsyncStorage,
-  ActivityIndicator,
 } from 'react-native';
 import {Button} from 'react-native-paper';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Text from '../components/Text';
-import {connect} from 'react-redux';
-import {add_token, update_login} from '../actions/token';
-const {width} = Dimensions.get('window');
-class Login extends Component {
-  state = {
-    username: '',
-    password: '',
-    loading: false,
-  };
 
-  handleLogin = () => {
-    this.setState({loading: true});
-    const {username, password} = this.state;
-    if (username === 'aashir' && password === '123456') {
-      setTimeout(() => {
-        const token = '' + Math.random();
-        AsyncStorage.setItem('token', token);
-
-        this.props.updateToken(token);
-        this.props.updateLoginStatus(true);
-        this.setState({loading: false});
-      }, 2000);
-    } else {
-      setTimeout(() => {
-        alert('Wrong');
-        this.setState({loading: false});
-      }, 2000);
-    }
-  };
-
-  handleUsername(username) {
-    this.setState({username});
-  }
-  handlePassword(password) {
-    this.setState({password});
-  }
+const {width, height} = Dimensions.get('window');
+export default class Register extends Component {
   render() {
     return (
       <KeyboardAvoidingView
@@ -79,15 +43,17 @@ class Login extends Component {
                 margin: 10,
                 borderRadius: 10,
               }}>
-              Sign In
+              Sign Up
             </Text>
             <View>
-              <TextInput
-                placeholder="Email"
-                style={styles.InputStyles}
-                value={this.state.username}
-                onChangeText={(e) => this.handleUsername(e)}
+              <TextInput placeholder="Ful Name" style={styles.InputStyles} />
+              <Icon
+                name="user"
+                style={{position: 'absolute', top: 26, left: 10, color: 'gray'}}
               />
+            </View>
+            <View>
+              <TextInput placeholder="Email" style={styles.InputStyles} />
               <Icon
                 name="envelope"
                 style={{position: 'absolute', top: 26, left: 10, color: 'gray'}}
@@ -98,8 +64,6 @@ class Login extends Component {
                 placeholder="Password"
                 secureTextEntry
                 style={styles.InputStyles}
-                value={this.state.password}
-                onChangeText={(e) => this.handlePassword(e)}
               />
               <Icon
                 name="lock"
@@ -111,17 +75,15 @@ class Login extends Component {
                 }}
               />
             </View>
-            {this.state.loading ? (
-              <ActivityIndicator size={25} color="red" />
-            ) : (
-              <Button
-                color="#ffb030"
-                mode="text"
-                style={styles.ButtonStyles}
-                onPress={this.handleLogin}>
-                <Text buttonText>Sign In</Text>
-              </Button>
-            )}
+            <Button
+              color="#ffb030"
+              mode="text"
+              style={styles.ButtonStyles}
+              onPress={() => {
+                alert('hello');
+              }}>
+              <Text buttonText>Sign Up</Text>
+            </Button>
             <View
               style={{
                 flexDirection: 'row',
@@ -161,18 +123,18 @@ class Login extends Component {
               onPress={() => {
                 alert('hello');
               }}>
-              <Text buttonText>Sign in with facebook</Text>
+              <Text buttonText>Sign up with facebook</Text>
             </Button>
 
             <Button
               style={{marginTop: 10}}
               onPress={() => {
-                this.props.navigation.navigate('register');
+                this.props.navigation.navigate('login');
               }}>
               <Text sentence buttonText black>
-                Dont have an account?{' '}
+                Already have an account?{' '}
                 <Text bold style={{color: 'red'}} buttonText>
-                  Sign up
+                  Sign In
                 </Text>
               </Text>
             </Button>
@@ -198,19 +160,3 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
 });
-const MapStateToProps = (state) => {
-  return {
-    username: state.user,
-  };
-};
-const mapsDispatchToProps = (dispatch) => {
-  return {
-    updateToken: (token) => {
-      dispatch(add_token(token));
-    },
-    updateLoginStatus: (status) => {
-      dispatch(update_login(status));
-    },
-  };
-};
-export default connect(MapStateToProps, mapsDispatchToProps)(Login);

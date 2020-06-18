@@ -1,16 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {StyleSheet, View, ImageBackground} from 'react-native';
+import {StyleSheet, View, ImageBackground, Dimensions} from 'react-native';
+
 import Text from '../components/Text';
-export default class OcceanCard extends Component {
+const {width} = Dimensions.get('window');
+export default class TrackCard extends Component {
   render() {
     return (
       <ImageBackground
-        blurRadius={10}
+        blurRadius={2}
         imageStyle={{borderRadius: 20}}
         source={{
           uri:
-            'https://static.vecteezy.com/system/resources/thumbnails/000/273/915/original/ocean-background.jpg',
+            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
         }}
         style={styles.ImageBackground}>
         <Text h3>{this.props.children}</Text>
@@ -21,10 +23,10 @@ export default class OcceanCard extends Component {
 
 const styles = StyleSheet.create({
   ImageBackground: {
-    height: 120,
-    width: 120,
+    height: 155,
+    width: width / 2 - 30,
     borderRadius: 20,
-    marginRight: 20,
+    marginRight: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },

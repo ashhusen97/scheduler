@@ -2,35 +2,36 @@
 import React, {Component} from 'react';
 import {
   StyleSheet,
-  View,
   ImageBackground,
   ScrollView,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {connect} from 'react-redux';
-import Text from '../components/Text';
-import OcceanCard from '../containers/OcceanCard';
+import ResultList from '../containers/ResultList';
 const {width, height} = Dimensions.get('window');
 
 class Wakeup extends Component {
   render() {
+    console.log(this.props.data);
     return (
-      <ImageBackground
-        blurRadius={1.5}
-        style={styles.ImageBackground}
-        source={require('../assets/wakeup-bg.jpg')}>
-        <ScrollView style={styles.contentContainer}>
-          <Text fontFamily="Poppins-Regular" h1>
-            Categories
-          </Text>
-          <View style={styles.CategoriesCardContainer}>
-            <OcceanCard>Ocean</OcceanCard>
-            <OcceanCard>Ocean</OcceanCard>
-            <OcceanCard>Ocean</OcceanCard>
-          </View>
-          <View></View>
-        </ScrollView>
-      </ImageBackground>
+      <SafeAreaView style={{flex: 1}}>
+        <ImageBackground
+          blurRadius={1.5}
+          style={styles.ImageBackground}
+          source={require('../assets/wakeup-bg.jpg')}>
+          <ScrollView
+            style={styles.contentContainer}
+            showsVerticalScrollIndicator={false}>
+            <ResultList title={'Categories'} data={this.props.data} />
+            <ResultList
+              title={'Ocean'}
+              subtitle={'Positive'}
+              data={this.props.data}
+            />
+          </ScrollView>
+        </ImageBackground>
+      </SafeAreaView>
     );
   }
 }
@@ -38,7 +39,7 @@ class Wakeup extends Component {
 // class end
 const MapStateToProps = (state) => {
   return {
-    myname: state.name,
+    data: state.categories,
   };
 };
 
@@ -47,12 +48,7 @@ const styles = StyleSheet.create({
   ImageBackground: {
     width,
     height,
-    paddingVertical: 50,
-    paddingHorizontal: 20,
-  },
-  CategoriesCardContainer: {
-    marginTop: 30,
-    flexDirection: 'row',
+    paddingBottom: 30,
   },
 });
 export default connect(MapStateToProps, null)(Wakeup);

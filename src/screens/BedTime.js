@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
   StyleSheet,
@@ -27,7 +28,6 @@ export default class BedTime extends Component {
         </ScrollView>
       </ImageBackground>
     );
-    x;
   }
 }
 const styles = StyleSheet.create({
